@@ -39,7 +39,7 @@ function introduce(name: string, age?: number): void {
 introduce("bob");
 
 // 5.函数的重载
-// 可以使用联合类型解决吧
+// 可以使用联合类型解决
 
 function add(arg1: number, arg2: number): number;
 function add(arg1: string, arg2: string): string;
