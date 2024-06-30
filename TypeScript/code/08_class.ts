@@ -4,7 +4,7 @@ class Person {
   constructor(age: number) {
     this._age = age
   }
-
+  
   
   
 }
