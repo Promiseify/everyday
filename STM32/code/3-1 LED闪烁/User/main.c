@@ -1,4 +1,5 @@
 #include "stm32f10x.h"                  // Device header
+#include "Delay.c"
 
 int main(void) {
 	// 使用RCC开启GPIO的时钟
@@ -16,9 +17,14 @@ int main(void) {
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 	
 	// 使用输出或者输入的函数控制GPIO口
-	GPIO_ResetBits(GPIOA, GPIO_Pin_0); // pin0端口设置低电平，点灯操作完成
+	// pin0端口设置低电平，点灯操作完成
+	// GPIO_ResetBits(GPIOA, GPIO_Pin_0); 
 	
 	while(1) {
-		
+		// 使用这两种方式闪烁灯的方式完成
+		GPIO_ResetBits(GPIOA, GPIO_Pin_0);
+		Delay_ms(500);
+		GPIO_SetBits(GPIOA, GPIO_Pin_0);
+		Delay_ms(500);
 	}
 }
