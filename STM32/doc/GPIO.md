@@ -1,7 +1,7 @@
 ### 操作STM32的GPIO需要三个步骤：
 
 1. 使用RCC开启GPIO的时钟
-2. 使用GPIO_Init函数初始化GPIO
+2. 使用GPIO_Init函数初始化GPIO （不显示代码提示的话，可以按一下快捷键Ctrl+Alt+空格）
 3. 使用输出或者输入的函数控制GPIO口
 
 
