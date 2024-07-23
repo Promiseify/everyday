@@ -13,9 +13,9 @@ int main(void) {
 	while(1) {
 		KeyNum = Key_GetNum();
 		if(KeyNum == 1) {
-			LED1_ON();
+			LED1_Turn();
 		} else {
-			LED1_OFF();
+			LED2_Turn();
 		}
 	}
 }
