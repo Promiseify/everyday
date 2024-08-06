@@ -1,5 +1,5 @@
 #include "stm32f10x.h"                  // Device header
-#include "Delay.c"
+#include "Delay.h"
 
 int main(void) {
 	

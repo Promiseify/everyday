@@ -1,7 +1,8 @@
 #include "stm32f10x.h"                  // Device header
-#include "Delay.c"
+#include "Delay.h"
 
-int main(void) {
+int main(void) 
+{
 	// 使用RCC开启GPIO的时钟
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
 	
