@@ -17,3 +17,8 @@
 7. GPIO_Mode_AF_OD AF_OD(Atl Open Drain) 复用开漏输出
 8. GPIO_Mode_AF_PP AF_PP(Atl Push Pull) 复用推挽输出
 
+
+
+### 八种工作模式使用情况
+
+浮空输入：如果外部的输入信号功率很小，内部的上拉电阻可能会影响到这个输入信号，防止影响外部输入的电平
