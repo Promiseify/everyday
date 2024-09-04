@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\APP\led;.\Public;.\APP\beep;.\APP\smg;.\APP\key;.\APP\leddz;.\APP\dc_motor;.\APP\step_motor;.\APP\exti;.\APP\time;.\APP\pwm;.\APP\iwdg;.\APP\wwdg;.\APP\input;.\APP\wkup;.\APP\adc;.\APP\pressure</IncludePath>
+              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\APP\led;.\Public;.\APP\beep;.\APP\smg;.\APP\key;.\APP\leddz;.\APP\dc_motor;.\APP\step_motor;.\APP\exti;.\APP\time;.\APP\pwm;.\APP\iwdg;.\APP\wwdg;.\APP\input;.\APP\wkup;.\APP\adc;.\APP\pressure;.\APP\sd</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -501,14 +501,34 @@
               <FilePath>.\APP\pressure\pressure.h</FilePath>
             </File>
             <File>
-              <FileName>sd.c</FileName>
+              <FileName>msd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\APP\sd\sd.c</FilePath>
+              <FilePath>.\APP\sd\msd.c</FilePath>
             </File>
             <File>
-              <FileName>sd.h</FileName>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\sd\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\sd\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>integer.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\APP\sd\sd.h</FilePath>
+              <FilePath>.\APP\sd\integer.h</FilePath>
+            </File>
+            <File>
+              <FileName>ffconf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\sd\ffconf.h</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f10x_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Libraries\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.c</FilePath>
             </File>
           </Files>
         </Group>

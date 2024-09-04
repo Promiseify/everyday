@@ -33,3 +33,7 @@
 .\obj\main.o: .\Public\usart.h
 .\obj\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 .\obj\main.o: .\APP\pressure\pressure.h
+.\obj\main.o: .\APP\sd\msd.h
+.\obj\main.o: .\APP\sd\ff.h
+.\obj\main.o: .\APP\sd\integer.h
+.\obj\main.o: .\APP\sd\ffconf.h
