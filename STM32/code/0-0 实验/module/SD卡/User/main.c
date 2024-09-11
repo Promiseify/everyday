@@ -20,13 +20,12 @@ UINT br, bw;         // File R/W count
 
 int main()
 {
-	u8 i = 0, ret = 1, key = 0;
+	u8 i = 0, ret = 1, key = 0, flag = 0;
 	u16 value = 0;
 	float vol; // 电压
 	float pressure; // 压力
 	char buffer[100];
-	char timeBuffer[100];
-
+	
 	SysTick_Init(72);
 	
 	KEY_Init();
@@ -39,12 +38,14 @@ int main()
 	
 	//res=0 ； 证明OK
 	ret = MSD_Init();
+	printf("初始化: %d\n", ret);
 	// 串口初始化
 	SD_Card_Ready = ret;
 	// 挂载
 	res = f_mount(0, &fs);
-	res = f_open(&fsrc,"Test.txt", FA_CREATE_ALWAYS | FA_WRITE | FA_OPEN_ALWAYS);//res=0 ； 证明OK
-	
+	printf("挂载: %d\n", ret);
+	res = f_open(&fsrc,"Test.txt", FA_CREATE_ALWAYS | FA_WRITE);//res=0 ； 证明OK
+	printf("创建文件: %d\n", ret);
 	const TCHAR *start_text = "start writing!\r\n";
 	f_puts(start_text, &fsrc);
 	
@@ -55,36 +56,59 @@ int main()
 	{	
 		i++;
 		key = KEY_Scan(0);   //扫描按键
-		sprintf(timeBuffer, "time: %d\r\n", i);
-		f_puts(timeBuffer, &fsrc);
-		
-		if (i % 100 == 0)
+		if (flag == 0)
 		{
-			value = Get_AD0_Value();
-			printf("检测AD值为：%d\r\n", value);
+			if (i % 100 == 0)
+			{
+				value = Get_AD0_Value();
+				
+				vol = Get_ADC_Value_to_Voltage(value);
+				
+				pressure = Get_Voltage_to_Pressure(vol);
+				
+				sprintf(buffer, "AD: %d, vol: %.2fV, weight: %.2fkg\r\n", value, vol, pressure);
+				printf("buffer: %s", buffer);
+				f_puts(buffer, &fsrc);
+			}
 			
-			vol = Get_ADC_Value_to_Voltage(value);
-			printf("检测电压值为：%.2fV\r\n", vol);
-			
-			pressure = Get_Voltage_to_Pressure(vol);
-			printf("检测重量为：%.2fkg\r\n", pressure);
-			
-			sprintf(buffer, "AD: %d, vol: %.2fV, weight: %.2fkg\r\n", value, vol, pressure);
-			f_puts(buffer, &fsrc);
+			delay_ms(10);
 		}
-		
-		delay_ms(10);
 		
 		// 按键模块触发关闭SD卡的读写
 		switch(key)
 		{
 			case KEY1_PRESS:
 				printf("按键1触发");
-				f_close(&fsrc);
-				f_mount(0, NULL);
+				flag = 1;
 				break;
 			case KEY2_PRESS: 
 				printf("按键2触发");
+				if (flag == 1) // 确保在关闭SD卡时文件已经打开
+				{
+					// 先同步数据到SD卡，确保文件完整写入
+					res = f_sync(&fsrc);
+					if (res == FR_OK) {
+						printf("数据同步成功\n");
+					} else {
+						printf("数据同步失败，错误码: %d\n", res);
+					}
+
+					// 关闭文件
+					res = f_close(&fsrc);
+					if (res == FR_OK) {
+						printf("文件关闭成功\n");
+					} else {
+						printf("文件关闭失败，错误码: %d\n", res);
+					}
+
+					// 取消挂载
+					res = f_mount(0, NULL);
+					if (res == FR_OK) {
+						printf("SD卡取消挂载成功\n");
+					} else {
+						printf("SD卡取消挂载失败，错误码: %d\n", res);
+					}
+				}
 				break;
 			case KEY3_PRESS: 
 				printf("按键3触发");
