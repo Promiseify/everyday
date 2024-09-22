@@ -15,6 +15,4 @@
 .\obj\main.o: ..\Source\wit_c_sdk\wit_c_sdk.h
 .\obj\main.o: ..\Source\wit_c_sdk\REG.h
 .\obj\main.o: ..\Source\Drive\UART1.h
-.\obj\main.o: ..\Source\Drive\UART2.h
-.\obj\main.o: ..\Source\STM32F10xLib\inc\stm32f10x_usart.h
 .\obj\main.o: ..\Source\Drive\delay.h

@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\APP\led;.\Public;.\APP\beep;.\APP\smg;.\APP\key;.\APP\leddz;.\APP\dc_motor;.\APP\step_motor;.\APP\exti;.\APP\time;.\APP\pwm;.\APP\iwdg;.\APP\wwdg;.\APP\input;.\APP\wkup;.\APP\adc;.\APP\pressure;.\APP\sd;.\APP\key</IncludePath>
+              <IncludePath>.\User;.\Libraries\CMSIS;.\Libraries\STM32F10x_StdPeriph_Driver\inc;.\APP\led;.\Public;.\APP\beep;.\APP\smg;.\APP\key;.\APP\leddz;.\APP\dc_motor;.\APP\step_motor;.\APP\exti;.\APP\time;.\APP\pwm;.\APP\iwdg;.\APP\wwdg;.\APP\input;.\APP\wkup;.\APP\adc;.\APP\pressure;.\APP\sd;.\APP\key;.\APP\angle</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -535,6 +535,26 @@
               <FileType>1</FileType>
               <FilePath>.\APP\key\key.c</FilePath>
             </File>
+            <File>
+              <FileName>angle.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\angle\angle.h</FilePath>
+            </File>
+            <File>
+              <FileName>angle.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\angle\angle.c</FilePath>
+            </File>
+            <File>
+              <FileName>wit_c_sdk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\angle\wit_c_sdk.c</FilePath>
+            </File>
+            <File>
+              <FileName>wit_c_sdk.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\angle\wit_c_sdk.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -554,6 +574,31 @@
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Public\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>UART1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Public\UART1.c</FilePath>
+            </File>
+            <File>
+              <FileName>UART1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Public\UART1.h</FilePath>
+            </File>
+            <File>
+              <FileName>UART2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Public\UART2.c</FilePath>
+            </File>
+            <File>
+              <FileName>UART2.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Public\UART2.h</FilePath>
+            </File>
+            <File>
+              <FileName>REG.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Public\REG.h</FilePath>
             </File>
           </Files>
         </Group>

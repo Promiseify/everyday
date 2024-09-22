@@ -2,9 +2,9 @@
 .\obj\stm32f10x_it.o: ..\Source\STM32F10xLib\M3\stm32f10x_it.h
 .\obj\stm32f10x_it.o: ..\Source\STM32F10xLib\M3\stm32f10x.h
 .\obj\stm32f10x_it.o: ..\Source\STM32F10xLib\M3\core_cm3.h
-.\obj\stm32f10x_it.o: D:\MDK5.36\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\stm32f10x_it.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
 .\obj\stm32f10x_it.o: ..\Source\STM32F10xLib\M3\core_cmInstr.h
-.\obj\stm32f10x_it.o: D:\MDK5.36Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armcc.h
+.\obj\stm32f10x_it.o: D:\Keil5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include\cmsis_armcc.h
 .\obj\stm32f10x_it.o: ..\Source\STM32F10xLib\M3\core_cmFunc.h
 .\obj\stm32f10x_it.o: ..\Source\STM32F10xLib\M3\system_stm32f10x.h
 .\obj\stm32f10x_it.o: ..\Source\STM32F10xLib\M3\stm32f10x_conf.h

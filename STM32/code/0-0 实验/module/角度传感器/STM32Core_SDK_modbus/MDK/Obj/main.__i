@@ -1,6 +1,0 @@
--c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections --signed_chars -I ..\Source\APP -I ..\Source\STM32F10xLib\inc -I ..\Source\STM32F10xLib\M3 -I ..\Source\Drive -I ..\Source\wit_c_sdk
--I.\RTE\_Project
--ID:\Keil5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include
--ID:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include
--D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER
--o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d "..\Source\APP\Main.c"

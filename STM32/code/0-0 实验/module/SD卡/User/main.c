@@ -9,6 +9,18 @@
 // 按键模块
 #include "key.h"
 
+#include "wit_c_sdk.h"
+#include "UART1.h"
+#include "UART2.h"
+#include "angle.h"
+
+
+#define ACC_UPDATE		0x01
+#define GYRO_UPDATE		0x02
+#define ANGLE_UPDATE	0x04
+#define MAG_UPDATE		0x08
+#define READ_UPDATE		0x80
+static volatile char s_cDataUpdate = 0, s_cCmd = 0xff;
 
 // extern char file_num;//选中的文件标号
 // extern DIR start_dirs; //目录起点信息
@@ -20,6 +32,8 @@ UINT br, bw;         // File R/W count
 
 int main()
 {
+	float fAcc[3], fGyro[3], fAngle[3];
+	int j;
 	u8 i = 0, ret = 1, key = 0, flag = 0;
 	u16 value = 0;
 	float vol; // 电压
@@ -49,11 +63,52 @@ int main()
 	const TCHAR *start_text = "start writing!\r\n";
 	f_puts(start_text, &fsrc);
 	
-	// f_close(&fsrc);
-	// f_mount(0, NULL);
+	// 角度传感器初始化相关问题
+	Usart1Init(9600);
+	Usart2Init(9600);
+	RS485_IO_Init();
+	WitInit(WIT_PROTOCOL_MODBUS, 0x50);
+	WitSerialWriteRegister(SensorUartSend);
+	WitRegisterCallBack(CopeSensorData);
+	WitDelayMsRegister(Delayms);
+	AutoScanSensor();
 	
 	while(1)
 	{	
+		WitReadReg(AX, 12);
+		delay_ms(500);
+		CmdProcess();
+		if(s_cDataUpdate)
+		{
+			for(j = 0; j < 3; j++)
+			{
+				fAcc[j] = sReg[AX+j] / 32768.0f * 16.0f;
+				fGyro[j] = sReg[GX+j] / 32768.0f * 2000.0f;
+				fAngle[j] = sReg[Roll+j] / 32768.0f * 180.0f;
+			}
+			if(s_cDataUpdate & ACC_UPDATE)
+			{
+				printf("acc:%.3f %.3f %.3f\r\n", fAcc[0], fAcc[1], fAcc[2]);
+				s_cDataUpdate &= ~ACC_UPDATE;
+			}
+			if(s_cDataUpdate & GYRO_UPDATE)
+			{
+				printf("gyro:%.3f %.3f %.3f\r\n", fGyro[0], fGyro[1], fGyro[2]);
+				s_cDataUpdate &= ~GYRO_UPDATE;
+			}
+			if(s_cDataUpdate & ANGLE_UPDATE)
+			{
+				printf("angle:%.3f %.3f %.3f\r\n", fAngle[0], fAngle[1], fAngle[2]);
+				s_cDataUpdate &= ~ANGLE_UPDATE;
+			}
+			if(s_cDataUpdate & MAG_UPDATE)
+			{
+				printf("mag:%d %d %d\r\n", sReg[HX], sReg[HY], sReg[HZ]);
+				s_cDataUpdate &= ~MAG_UPDATE;
+			}
+		}
+		
+		
 		i++;
 		key = KEY_Scan(0);   //扫描按键
 		if (flag == 0)

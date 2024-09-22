@@ -2,9 +2,9 @@
 .\obj\delay.o: ..\Source\Drive\delay.h
 .\obj\delay.o: ..\Source\STM32F10xLib\M3\stm32f10x.h
 .\obj\delay.o: ..\Source\STM32F10xLib\M3\core_cm3.h
-.\obj\delay.o: D:\MDK5.36\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\delay.o: D:\Keil5\ARM\ARMCC\Bin\..\include\stdint.h
 .\obj\delay.o: ..\Source\STM32F10xLib\M3\core_cmInstr.h
-.\obj\delay.o: D:\MDK5.36Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armcc.h
+.\obj\delay.o: D:\Keil5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include\cmsis_armcc.h
 .\obj\delay.o: ..\Source\STM32F10xLib\M3\core_cmFunc.h
 .\obj\delay.o: ..\Source\STM32F10xLib\M3\system_stm32f10x.h
 .\obj\delay.o: ..\Source\STM32F10xLib\M3\stm32f10x_conf.h

@@ -38,3 +38,9 @@
 .\obj\main.o: .\APP\sd\integer.h
 .\obj\main.o: .\APP\sd\ffconf.h
 .\obj\main.o: .\APP\key\key.h
+.\obj\main.o: .\APP\angle\wit_c_sdk.h
+.\obj\main.o: D:\Keil5\ARM\ARMCC\Bin\..\include\string.h
+.\obj\main.o: .\Public\REG.h
+.\obj\main.o: .\Public\UART1.h
+.\obj\main.o: .\Public\UART2.h
+.\obj\main.o: .\APP\angle\angle.h
