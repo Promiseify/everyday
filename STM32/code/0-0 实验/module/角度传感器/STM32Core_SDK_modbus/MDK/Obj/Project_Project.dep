@@ -1,7 +1,7 @@
 Dependencies for Project 'Project', Target 'Project': (DO NOT MODIFY !)
-F (..\Source\APP\Main.c)(0x66E2EF9B)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections --signed_chars -I ..\Source\APP -I ..\Source\STM32F10xLib\inc -I ..\Source\STM32F10xLib\M3 -I ..\Source\Drive -I ..\Source\wit_c_sdk-I.\RTE\_Project-ID:\Keil5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
+F (..\Source\APP\Main.c)(0x66E2EFB2)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections --signed_chars -I ..\Source\APP -I ..\Source\STM32F10xLib\inc -I ..\Source\STM32F10xLib\M3 -I ..\Source\Drive -I ..\Source\wit_c_sdk-I.\RTE\_Project-ID:\Keil5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
 I (D:\Keil5\ARM\ARMCC\include\string.h)(0x667FC2F9)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x667FC2F9)
+I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x66ED173B)
 I (..\Source\STM32F10xLib\M3\stm32f10x.h)(0x66D04412)
 I (..\Source\STM32F10xLib\M3\core_cm3.h)(0x66D04412)
 I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x667FC2F9)
@@ -16,16 +16,18 @@ I (..\Source\STM32F10xLib\inc\misc.h)(0x66D04412)
 I (..\Source\wit_c_sdk\wit_c_sdk.h)(0x66D04413)
 I (..\Source\wit_c_sdk\REG.h)(0x66D04413)
 I (..\Source\Drive\UART1.h)(0x66D04412)
+I (..\Source\Drive\UART2.h)(0x66D04412)
+I (..\Source\STM32F10xLib\inc\stm32f10x_usart.h)(0x66D04412)
 I (..\Source\Drive\delay.h)(0x66D04412)
 F (..\Source\wit_c_sdk\wit_c_sdk.c)(0x66D04413)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections --signed_chars -I ..\Source\APP -I ..\Source\STM32F10xLib\inc -I ..\Source\STM32F10xLib\M3 -I ..\Source\Drive -I ..\Source\wit_c_sdk-I.\RTE\_Project-ID:\Keil5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\obj\wit_c_sdk.o --omf_browse .\obj\wit_c_sdk.crf --depend .\obj\wit_c_sdk.d)
 I (..\Source\wit_c_sdk\wit_c_sdk.h)(0x66D04413)
 I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x667FC2F9)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x667FC2F9)
+I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x66ED173B)
 I (D:\Keil5\ARM\ARMCC\include\string.h)(0x667FC2F9)
 I (..\Source\wit_c_sdk\REG.h)(0x66D04413)
 F (..\Source\wit_c_sdk\REG.h)(0x66D04413)()
 F (..\Source\Drive\UART2.c)(0x66D04412)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections --signed_chars -I ..\Source\APP -I ..\Source\STM32F10xLib\inc -I ..\Source\STM32F10xLib\M3 -I ..\Source\Drive -I ..\Source\wit_c_sdk-I.\RTE\_Project-ID:\Keil5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\obj\uart2.o --omf_browse .\obj\uart2.crf --depend .\obj\uart2.d)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x667FC2F9)
+I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x66ED173B)
 I (..\Source\STM32F10xLib\M3\stm32f10x.h)(0x66D04412)
 I (..\Source\STM32F10xLib\M3\core_cm3.h)(0x66D04412)
 I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x667FC2F9)
@@ -42,7 +44,7 @@ I (..\Source\wit_c_sdk\wit_c_sdk.h)(0x66D04413)
 I (D:\Keil5\ARM\ARMCC\include\string.h)(0x667FC2F9)
 I (..\Source\wit_c_sdk\REG.h)(0x66D04413)
 F (..\Source\Drive\UART1.c)(0x66D04412)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections --signed_chars -I ..\Source\APP -I ..\Source\STM32F10xLib\inc -I ..\Source\STM32F10xLib\M3 -I ..\Source\Drive -I ..\Source\wit_c_sdk-I.\RTE\_Project-ID:\Keil5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include-ID:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="524" -D_RTE_ -DSTM32F10X_MD -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\obj\uart1.o --omf_browse .\obj\uart1.crf --depend .\obj\uart1.d)
-I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x667FC2F9)
+I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x66ED173B)
 I (..\Source\STM32F10xLib\M3\stm32f10x.h)(0x66D04412)
 I (..\Source\STM32F10xLib\M3\core_cm3.h)(0x66D04412)
 I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x667FC2F9)

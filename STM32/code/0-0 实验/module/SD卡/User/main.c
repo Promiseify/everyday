@@ -22,8 +22,6 @@
 #define READ_UPDATE		0x80
 static volatile char s_cDataUpdate = 0, s_cCmd = 0xff;
 
-// extern char file_num;//选中的文件标号
-// extern DIR start_dirs; //目录起点信息
 extern vu8 SD_Card_Ready;//SD卡初始化成功标志
 FATFS fs;            
 FIL fsrc;      // file objects
@@ -34,8 +32,10 @@ int main()
 {
 	float fAcc[3], fGyro[3], fAngle[3];
 	int j;
+	
 	u8 i = 0, ret = 1, key = 0, flag = 0;
 	u16 value = 0;
+	/*
 	float vol; // 电压
 	float pressure; // 压力
 	char buffer[100];
@@ -47,7 +47,7 @@ int main()
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);  //中断优先级分组分2组
 	
 	ADC0_Pressure_Init();
-	
+	*/
 	USART1_Init(115200);
 	
 	//res=0 ； 证明OK
@@ -55,16 +55,28 @@ int main()
 	printf("初始化: %d\n", ret);
 	// 串口初始化
 	SD_Card_Ready = ret;
+	
+	if (ret != 0) {
+		printf("SD卡初始化失败\n");
+	}
 	// 挂载
 	res = f_mount(0, &fs);
-	printf("挂载: %d\n", ret);
+	if (res != FR_OK) {
+		printf("挂载失败，错误码: %d\n", res);
+		// 处理挂载失败
+	}
+
 	res = f_open(&fsrc,"Test.txt", FA_CREATE_ALWAYS | FA_WRITE);//res=0 ； 证明OK
-	printf("创建文件: %d\n", ret);
+
+	if (res != FR_OK) {
+		printf("创建文件失败，错误码: %d\n", res);
+		// 处理文件打开失败
+	}
+	
 	const TCHAR *start_text = "start writing!\r\n";
 	f_puts(start_text, &fsrc);
 	
 	// 角度传感器初始化相关问题
-	Usart1Init(9600);
 	Usart2Init(9600);
 	RS485_IO_Init();
 	WitInit(WIT_PROTOCOL_MODBUS, 0x50);
@@ -108,7 +120,7 @@ int main()
 			}
 		}
 		
-		
+		/*
 		i++;
 		key = KEY_Scan(0);   //扫描按键
 		if (flag == 0)
@@ -121,13 +133,14 @@ int main()
 				
 				pressure = Get_Voltage_to_Pressure(vol);
 				
-				sprintf(buffer, "AD: %d, vol: %.2fV, weight: %.2fkg\r\n", value, vol, pressure);
+				snprintf(buffer, sizeof(buffer), "AD: %d, vol: %.2fV, weight: %.2fkg\r\n", value, vol, pressure);
 				printf("buffer: %s", buffer);
 				f_puts(buffer, &fsrc);
 			}
 			
 			delay_ms(10);
 		}
+		*/
 		
 		// 按键模块触发关闭SD卡的读写
 		switch(key)
