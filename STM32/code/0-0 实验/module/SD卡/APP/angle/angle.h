@@ -9,7 +9,10 @@
 #define ANGLE_UPDATE	0x04
 #define MAG_UPDATE		0x08
 #define READ_UPDATE		0x80
-static volatile char s_cDataUpdate = 0, s_cCmd = 0xff;
+
+extern volatile char s_cDataUpdate;
+extern volatile char s_cCmd;
+
 
 void CopeCmdData(unsigned char ucData);
 void CmdProcess(void);

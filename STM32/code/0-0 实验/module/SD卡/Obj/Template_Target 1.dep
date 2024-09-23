@@ -1,5 +1,5 @@
 Dependencies for Project 'Template', Target 'Target 1': (DO NOT MODIFY !)
-F (.\User\main.c)(0x66F171A7)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\User -I .\Libraries\CMSIS -I .\Libraries\STM32F10x_StdPeriph_Driver\inc -I .\APP\led -I .\Public -I .\APP\beep -I .\APP\smg -I .\APP\key -I .\APP\leddz -I .\APP\dc_motor -I .\APP\step_motor -I .\APP\exti -I .\APP\time -I .\APP\pwm -I .\APP\iwdg -I .\APP\wwdg -I .\APP\input -I .\APP\wkup -I .\APP\adc -I .\APP\pressure -I .\APP\sd -I .\APP\key -I .\APP\angle-I.\RTE\_Target_1-ID:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-ID:\Keil5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
+F (.\User\main.c)(0x66F173A8)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\User -I .\Libraries\CMSIS -I .\Libraries\STM32F10x_StdPeriph_Driver\inc -I .\APP\led -I .\Public -I .\APP\beep -I .\APP\smg -I .\APP\key -I .\APP\leddz -I .\APP\dc_motor -I .\APP\step_motor -I .\APP\exti -I .\APP\time -I .\APP\pwm -I .\APP\iwdg -I .\APP\wwdg -I .\APP\input -I .\APP\wkup -I .\APP\adc -I .\APP\pressure -I .\APP\sd -I .\APP\key -I .\APP\angle-I.\RTE\_Target_1-ID:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-ID:\Keil5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
 I (.\Public\system.h)(0x66D04417)
 I (.\User\stm32f10x.h)(0x66D04417)
 I (.\Libraries\CMSIS\core_cm3.h)(0x66D04417)
@@ -39,7 +39,7 @@ I (.\APP\sd\ff.h)(0x66D708F2)
 I (.\APP\sd\integer.h)(0x66D70B2B)
 I (.\APP\sd\ffconf.h)(0x66D70B5E)
 I (.\APP\key\key.h)(0x66E013B9)
-I (.\APP\angle\angle.h)(0x66F17186)
+I (.\APP\angle\angle.h)(0x66F17BD9)
 I (.\APP\angle\wit_c_sdk.h)(0x66D04413)
 I (D:\Keil5\ARM\ARMCC\include\string.h)(0x667FC2F9)
 I (.\Public\REG.h)(0x66ED1541)
@@ -650,8 +650,8 @@ I (.\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h)(0x66D04417)
 I (.\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h)(0x66D04417)
 I (.\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h)(0x66D04417)
 I (.\Public\SysTick.h)(0x66D04417)
-F (.\APP\angle\angle.h)(0x66F17186)()
-F (.\APP\angle\angle.c)(0x66F1717B)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\User -I .\Libraries\CMSIS -I .\Libraries\STM32F10x_StdPeriph_Driver\inc -I .\APP\led -I .\Public -I .\APP\beep -I .\APP\smg -I .\APP\key -I .\APP\leddz -I .\APP\dc_motor -I .\APP\step_motor -I .\APP\exti -I .\APP\time -I .\APP\pwm -I .\APP\iwdg -I .\APP\wwdg -I .\APP\input -I .\APP\wkup -I .\APP\adc -I .\APP\pressure -I .\APP\sd -I .\APP\key -I .\APP\angle-I.\RTE\_Target_1-ID:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-ID:\Keil5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\obj\angle.o --omf_browse .\obj\angle.crf --depend .\obj\angle.d)
+F (.\APP\angle\angle.h)(0x66F17BD9)()
+F (.\APP\angle\angle.c)(0x66F17B3F)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\User -I .\Libraries\CMSIS -I .\Libraries\STM32F10x_StdPeriph_Driver\inc -I .\APP\led -I .\Public -I .\APP\beep -I .\APP\smg -I .\APP\key -I .\APP\leddz -I .\APP\dc_motor -I .\APP\step_motor -I .\APP\exti -I .\APP\time -I .\APP\pwm -I .\APP\iwdg -I .\APP\wwdg -I .\APP\input -I .\APP\wkup -I .\APP\adc -I .\APP\pressure -I .\APP\sd -I .\APP\key -I .\APP\angle-I.\RTE\_Target_1-ID:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-ID:\Keil5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\obj\angle.o --omf_browse .\obj\angle.crf --depend .\obj\angle.d)
 I (D:\Keil5\ARM\ARMCC\include\string.h)(0x667FC2F9)
 I (D:\Keil5\ARM\ARMCC\include\stdio.h)(0x66ED173B)
 I (.\User\stm32f10x.h)(0x66D04417)
@@ -684,10 +684,8 @@ I (.\Libraries\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h)(0x66D04417)
 I (.\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h)(0x66D04417)
 I (APP\angle\wit_c_sdk.h)(0x66D04413)
 I (.\Public\REG.h)(0x66ED1541)
-I (.\Public\SysTick.h)(0x66D04417)
+I (APP\angle\angle.h)(0x66F17BD9)
 I (.\Public\system.h)(0x66D04417)
-I (.\Public\UART1.h)(0x66D04412)
-I (.\Public\UART2.h)(0x66D04412)
 F (.\APP\angle\wit_c_sdk.c)(0x66D04413)(--c99 -c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I .\User -I .\Libraries\CMSIS -I .\Libraries\STM32F10x_StdPeriph_Driver\inc -I .\APP\led -I .\Public -I .\APP\beep -I .\APP\smg -I .\APP\key -I .\APP\leddz -I .\APP\dc_motor -I .\APP\step_motor -I .\APP\exti -I .\APP\time -I .\APP\pwm -I .\APP\iwdg -I .\APP\wwdg -I .\APP\input -I .\APP\wkup -I .\APP\adc -I .\APP\pressure -I .\APP\sd -I .\APP\key -I .\APP\angle-I.\RTE\_Target_1-ID:\Keil5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-ID:\Keil5\ARM\CMSIS\Include-D__UVISION_VERSION="524" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -DSTM32F10X_MD-o .\obj\wit_c_sdk.o --omf_browse .\obj\wit_c_sdk.crf --depend .\obj\wit_c_sdk.d)
 I (APP\angle\wit_c_sdk.h)(0x66D04413)
 I (D:\Keil5\ARM\ARMCC\include\stdint.h)(0x667FC2F9)

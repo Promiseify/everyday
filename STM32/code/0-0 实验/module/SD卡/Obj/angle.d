@@ -32,7 +32,5 @@
 .\obj\angle.o: .\Libraries\STM32F10x_StdPeriph_Driver\inc\misc.h
 .\obj\angle.o: APP\angle\wit_c_sdk.h
 .\obj\angle.o: .\Public\REG.h
-.\obj\angle.o: .\Public\SysTick.h
+.\obj\angle.o: APP\angle\angle.h
 .\obj\angle.o: .\Public\system.h
-.\obj\angle.o: .\Public\UART1.h
-.\obj\angle.o: .\Public\UART2.h
