@@ -1,6 +1,7 @@
 #include "system.h"
 #include "SysTick.h"
 #include "usart.h"
+#include "UART2.h"
 // 压力传感器
 #include "pressure.h"
 // sd卡读取
@@ -9,18 +10,9 @@
 // 按键模块
 #include "key.h"
 
-#include "wit_c_sdk.h"
-#include "UART1.h"
-#include "UART2.h"
+
 #include "angle.h"
 
-
-#define ACC_UPDATE		0x01
-#define GYRO_UPDATE		0x02
-#define ANGLE_UPDATE	0x04
-#define MAG_UPDATE		0x08
-#define READ_UPDATE		0x80
-static volatile char s_cDataUpdate = 0, s_cCmd = 0xff;
 
 extern vu8 SD_Card_Ready;//SD卡初始化成功标志
 FATFS fs;            
@@ -35,20 +27,17 @@ int main()
 	
 	u8 i = 0, ret = 1, key = 0, flag = 0;
 	u16 value = 0;
-	/*
-	float vol; // 电压
-	float pressure; // 压力
-	char buffer[100];
 	
 	SysTick_Init(72);
-	
 	KEY_Init();
+	USART1_Init(115200);
+	
+	float vol; // 电压
+	float pressure; // 压力
+	char buffer[100], accBuffer[100], gyroBuffer[100], angleBuffer[100], magBuffer[100];
 	
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);  //中断优先级分组分2组
-	
 	ADC0_Pressure_Init();
-	*/
-	USART1_Init(115200);
 	
 	//res=0 ； 证明OK
 	ret = MSD_Init();
@@ -66,7 +55,7 @@ int main()
 		// 处理挂载失败
 	}
 
-	res = f_open(&fsrc,"Test.txt", FA_CREATE_ALWAYS | FA_WRITE);//res=0 ； 证明OK
+	res = f_open(&fsrc, "Test.txt", FA_CREATE_ALWAYS | FA_WRITE);//res=0 ； 证明OK
 
 	if (res != FR_OK) {
 		printf("创建文件失败，错误码: %d\n", res);
@@ -76,17 +65,23 @@ int main()
 	const TCHAR *start_text = "start writing!\r\n";
 	f_puts(start_text, &fsrc);
 	
+	
 	// 角度传感器初始化相关问题
 	Usart2Init(9600);
+	
 	RS485_IO_Init();
+	
 	WitInit(WIT_PROTOCOL_MODBUS, 0x50);
 	WitSerialWriteRegister(SensorUartSend);
 	WitRegisterCallBack(CopeSensorData);
 	WitDelayMsRegister(Delayms);
+	
 	AutoScanSensor();
 	
 	while(1)
 	{	
+		key = KEY_Scan(0);   //扫描按键
+		
 		WitReadReg(AX, 12);
 		delay_ms(500);
 		CmdProcess();
@@ -100,29 +95,40 @@ int main()
 			}
 			if(s_cDataUpdate & ACC_UPDATE)
 			{
-				printf("acc:%.3f %.3f %.3f\r\n", fAcc[0], fAcc[1], fAcc[2]);
+				snprintf(accBuffer, sizeof(accBuffer), "acc:%.3f %.3f %.3f\r\n", fAcc[0], fAcc[1], fAcc[2]);
+				printf("accBuffer: %s", accBuffer);
+				f_puts(accBuffer, &fsrc);
+				
 				s_cDataUpdate &= ~ACC_UPDATE;
 			}
 			if(s_cDataUpdate & GYRO_UPDATE)
 			{
-				printf("gyro:%.3f %.3f %.3f\r\n", fGyro[0], fGyro[1], fGyro[2]);
+				snprintf(gyroBuffer, sizeof(gyroBuffer), "gyro:%.3f %.3f %.3f\r\n", fGyro[0], fGyro[1], fGyro[2]);
+				printf("gyroBuffer: %s", gyroBuffer);
+				f_puts(gyroBuffer, &fsrc);
+				
 				s_cDataUpdate &= ~GYRO_UPDATE;
 			}
 			if(s_cDataUpdate & ANGLE_UPDATE)
 			{
-				printf("angle:%.3f %.3f %.3f\r\n", fAngle[0], fAngle[1], fAngle[2]);
+				snprintf(angleBuffer, sizeof(angleBuffer), "angle:%.3f %.3f %.3f\r\n", fAngle[0], fAngle[1], fAngle[2]);
+				printf("angleBuffer: %s", angleBuffer);
+				f_puts(angleBuffer, &fsrc);
+				
 				s_cDataUpdate &= ~ANGLE_UPDATE;
 			}
 			if(s_cDataUpdate & MAG_UPDATE)
 			{
-				printf("mag:%d %d %d\r\n", sReg[HX], sReg[HY], sReg[HZ]);
+				snprintf(magBuffer, sizeof(magBuffer), "mag:%d %d %d\r\n", sReg[HX], sReg[HY], sReg[HZ]);
+				printf("magBuffer: %s", magBuffer);
+				f_puts(magBuffer, &fsrc);
+				
 				s_cDataUpdate &= ~MAG_UPDATE;
 			}
 		}
 		
-		/*
+		// 压力传感器
 		i++;
-		key = KEY_Scan(0);   //扫描按键
 		if (flag == 0)
 		{
 			if (i % 100 == 0)
@@ -140,7 +146,7 @@ int main()
 			
 			delay_ms(10);
 		}
-		*/
+		
 		
 		// 按键模块触发关闭SD卡的读写
 		switch(key)

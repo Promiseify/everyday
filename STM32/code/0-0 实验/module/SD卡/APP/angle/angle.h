@@ -2,6 +2,14 @@
 #define _angle_H
 
 #include "system.h"
+#include "wit_c_sdk.h"
+
+#define ACC_UPDATE		0x01
+#define GYRO_UPDATE		0x02
+#define ANGLE_UPDATE	0x04
+#define MAG_UPDATE		0x08
+#define READ_UPDATE		0x80
+static volatile char s_cDataUpdate = 0, s_cCmd = 0xff;
 
 void CopeCmdData(unsigned char ucData);
 void CmdProcess(void);
