@@ -12,12 +12,10 @@
 // 按键模块
 #include "key.h"
 
-
 #include "angle.h"
 
 /*
-
-extern vu8 SD_Card_Ready;//SD卡初始化成功标志
+extern vu8 SD_Card_Ready; // SD卡初始化成功标志
 FATFS fs;            
 FIL fsrc;      // file objects
 FRESULT res;         // FatFs function common result code
@@ -32,7 +30,6 @@ int main()
 	u16 value = 0;
 	
 	char buffer[100], accBuffer[100], gyroBuffer[100], angleBuffer[100], magBuffer[100];
-	
 	
 	SysTick_Init(72);
 	KEY_Init();
