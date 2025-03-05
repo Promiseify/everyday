@@ -5,46 +5,68 @@
 </template>
 
 <script>
-import { Application, Graphics, Texture } from 'pixi.js';
+import fav1 from '@/assets/img/fav1.jpg';
+import fav2 from '@/assets/img/fav2.jpg';
+import fav3 from '@/assets/img/fav3.jpg';
+import { Application, Assets, Container, Graphics, Sprite, Texture } from 'pixi.js';
+
+// 加载图片
+// await Assets.load(fav1);
+// await Assets.load(fav2);
+// await Assets.load(fav3);
+// const textureFav1 = new Texture.from(fav1);
+// const textureFav2 = new Texture.from(fav2);
+// const textureFav3 = new Texture.from(fav3);
 
 export default {
   name: 'App',
+  data() {
+    return {
+      // 横坐标格子数量
+      PTw: 50,
+      PTh: 50,
+      PTx: 5,
+      PTy: 5,
+      PTgap: 3
+    }
+  },
   mounted() {
     this.initPixi();
   },
   methods: {
     async initPixi() {
       const app = new Application();
-
       await app.init({
         width: window.innerWidth,
         height: window.innerHeight,
         backgroundColor: 0x1099bb,
-        resolution: window.devicePixelRatio || 1
+        resolution: window.devicePixelRatio || 1,
+        antialias: true
       });
-
       this.$refs.pixi.appendChild(app.canvas);
 
-      // 创建矩形
-      const rectangle = new Graphics()
-        .rect(0, 0, 200, 100)
-        .fill({ texture: Texture.WHITE, width: 10, color: '0xFF0000' })
-        .stroke({ width: 2, color: 'white' });
+      const container = new Container();
+      container.x = app.screen.width / 2;
+      container.y = app.screen.height / 2;
 
-      rectangle.position.set(200, 100)
-      // rectangle.x = 200;
-      // rectangle.y = 100;
-      // rectangle.rotation = 0.5;
-      // rectangle.pivot.set(100, 50);
+      // 容器加入舞台
+      app.stage.addChild(container);
 
-      app.stage.addChild(rectangle);
+      // 构造网格区域
+      for (let i = 0; i < this.PTx * this.PTy; i++) {
+        const PT = new Graphics()
+          .rect((i % this.PTx) * (this.PTw + this.PTgap), Math.floor(i / this.PTx) * (this.PTh + this.PTgap), this.PTw, this.PTh)
+          .stroke({ width: 5, color: '0xFFFFFF', alpha: 1 })
+          .fill(0xa0a8a8)
+          .on('click', () => {
+            PT.stroke({ width: 2, color: '0xFF0000' });
+          });
 
-      // 创建一个圆形
-      const circle = new Graphics()
-        .circle(50, 50, 50)
-        .fill(0x00ff00);
+        PT.interactive = true;
+        container.addChild(PT);
+      }
 
-      app.stage.addChild(circle);
+      container.pivot.set(container.width / 2, container.height / 2)
     }
   }
 }
