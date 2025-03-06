@@ -42,10 +42,11 @@ export default {
       await app.init({
         width: canvasWidth,
         height: canvasHeight,
-        backgroundColor: 0x109900,
+        backgroundColor: 0xbdbebd,
         resolution: 1,
         antialias: true
       });
+
       this.$refs.pixi.appendChild(app.canvas);
 
       let isDragging = false;
@@ -195,7 +196,7 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #1099bb;
+  background-color: #FFFFFF;
 }
 
 .pixi-container {
