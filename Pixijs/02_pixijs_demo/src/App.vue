@@ -182,22 +182,27 @@ export default {
       // 4.初步根据状态生成不同的纹理贴图
       for (let i = 0; i < this.PTNums; i++) {
         let texture = Texture.EMPTY
+
         const data = JsonData[i];
+        if (data.deepNo == 0) {
+          texture = channelTexture
+        }
+
         if (data.status == 1) {
           texture = forbidTexture
         }
 
-        if (data.channelNo == 2) {
-          texture = channelTexture
-        }
-        // 根据状态生成图片
         const sprite = new Sprite(texture);
-        sprite.width = Math.min(this.PTw, this.PTh) - this.PTgap;
-        sprite.height = Math.min(this.PTw, this.PTh) - this.PTgap;
-        sprite.x = (i % this.PTx) * (this.PTw + this.PTgap) + this.PTw / 2 - sprite.width / 2;
-        sprite.y = Math.floor(i / this.PTx) * (this.PTh + this.PTgap) + this.PTh / 2 - sprite.height / 2;
+        // 根据状态生成图片
+        sprite.width = Math.min(this.PTw, this.PTh);
+        sprite.height = Math.min(this.PTw, this.PTh);
+        sprite.x = (data.colNo - 1) * (this.PTw + this.PTgap) + this.PTw / 2 - sprite.width / 2;
+        sprite.y = (data.rowNo - 1) * (this.PTh + this.PTgap) + this.PTh / 2 - sprite.height / 2;
 
         sprite.pointerEvents = false;
+        if (data.deepNo == 0) {
+          sprite.pointerEvents = true;
+        }
 
         container.addChild(sprite);
       }
@@ -218,8 +223,8 @@ export default {
 }
 
 .pixi-container {
-  width: 80vw;
-  height: 80vh;
+  width: 90vw;
+  height: 90vh;
 }
 
 .pixi {
