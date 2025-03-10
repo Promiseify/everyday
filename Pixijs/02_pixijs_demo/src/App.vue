@@ -7,15 +7,20 @@
 </template>
 
 <script>
+import { data as JsonData } from '@/assets/data/WarehouseLocation0.json';
 import forbid from '@/assets/img/forbid.png';
 import location from '@/assets/img/location.png';
+import channel from '@/assets/img/channel.jpg';
+
 import { Application, Assets, Container, Graphics, Sprite, Texture } from 'pixi.js';
 
 // 加载图片
 await Assets.load(forbid);
 await Assets.load(location);
+await Assets.load(channel);
 const forbidTexture = new Texture.from(forbid);
 const locationTexture = new Texture.from(location);
+const channelTexture = new Texture.from(channel);
 
 export default {
   name: 'App',
@@ -26,7 +31,9 @@ export default {
       PTh: 30,
       PTx: 30,
       PTy: 20,
-      PTgap: 3
+      PTgap: 3,
+      PTNums: JsonData.length,
+      selectedPT: null
     }
   },
   mounted() {
@@ -34,6 +41,14 @@ export default {
   },
   methods: {
     async initPixi() {
+      // 1.生成底图
+      // 计算 rowNo、colNo 最大值
+      const maxRow = Math.max(...JsonData.map(item => item.rowNo));
+      const maxCol = Math.max(...JsonData.map(item => item.colNo));
+
+      this.PTx = maxCol;
+      this.PTy = maxRow;
+
       const canvasWidth = this.PTx * (this.PTw + this.PTgap) + 30;
       const canvasHeight = this.PTy * (this.PTh + this.PTgap) + 30;
 
@@ -49,6 +64,7 @@ export default {
 
       this.$refs.pixi.appendChild(app.canvas);
 
+      // 2.对canvas的移动进行监听操作
       let isDragging = false;
       let startX, startY;
 
@@ -100,6 +116,7 @@ export default {
       window.addEventListener('mouseup', onMouseUp);
 
 
+      // 3.生成灰色网格图
       const container = new Container();
       container.x = app.screen.width / 2;
       container.y = app.screen.height / 2;
@@ -108,6 +125,7 @@ export default {
       app.stage.addChild(container);
       // 存储所有矩形的数组
       const PTs = [];
+      let PTStartX = 0, PTStartY = 0;
       // 构造网格区域
       for (let i = 0; i < this.PTx * this.PTy; i++) {
         const x = (i % this.PTx) * (this.PTw + this.PTgap);
@@ -122,66 +140,66 @@ export default {
         PT.selected = false;
         container.addChild(PT);
         PTs.push(PT);
-      }
 
-      for (let i = 0; i < this.PTx * this.PTy; i++) {
-        let texture = forbidTexture
-
-        if (i % this.PTx == 0) {
-          texture = forbidTexture
-        } else if (i % this.PTx == 1) {
-          texture = locationTexture
-        } else {
-          texture = Texture.EMPTY;
-        }
-
-        // 根据状态生成图片
-        const forbidSprite = new Sprite(texture);
-        forbidSprite.width = Math.min(this.PTw, this.PTh) - this.PTgap;
-        forbidSprite.height = Math.min(this.PTw, this.PTh) - this.PTgap;
-        forbidSprite.x = (i % this.PTx) * (this.PTw + this.PTgap) + this.PTw / 2 - forbidSprite.width / 2;
-        forbidSprite.y = Math.floor(i / this.PTx) * (this.PTh + this.PTgap) + this.PTh / 2 - forbidSprite.height / 2;
-
-        forbidSprite.interactive = true;
-        forbidSprite.buttonMode = true;
+        PT.on('pointerdown', (event) => {
+          PTStartX = event.clientX;
+          PTStartY = event.clientY;
+        });
 
         // 添加点击事件处理程序
-        forbidSprite.on('click', (event) => {
+        PT.on('pointerup', (event) => {
+          // 判断是否是移动
           const endX = event.clientX;
           const endY = event.clientY;
-          const distance = Math.sqrt((endX - startX) ** 2 + (endY - startY) ** 2);
+          const distance = Math.sqrt((endX - PTStartX) ** 2 + (endY - PTStartY) ** 2);
           if (distance > 3) return;
-          PTs.forEach((PT) => {
-            if (PT.selected) {
-              const { x, y } = PT.positionData;
-              PT.clear();
-              PT.rect(x, y, this.PTw, this.PTh)
-                .stroke({ width: 5, color: '0xFFFFFF', alpha: 1 })
-                .fill(0xa0a8a8);
-            }
-          })
 
-          // 切换选中状态
-          forbidSprite.selected = !forbidSprite.selected;
-          // 更新矩形的边框颜色
-          const PT = PTs[i];
-          const { x, y } = PT.positionData;
-          PT.selected = forbidSprite.selected;
-          PT.clear();
-
-          if (forbidSprite.selected) {
-            PT.rect(x, y, this.PTw, this.PTh)
+          // 开始对点击事件处理
+          const clickPT = event.target;
+          if (this.selectedPT && this.selectedPT.selected) {
+            const { x, y } = this.selectedPT.positionData;
+            this.selectedPT.clear();
+            this.selectedPT.rect(x, y, this.PTw, this.PTh)
               .stroke({ width: 5, color: '0xFFFFFF', alpha: 1 })
               .fill(0xa0a8a8);
-
-            PT.stroke({ width: 2, color: '0xFF0000' })
-          } else {
-            PT.rect(x, y, this.PTw, this.PTh)
-              .stroke({ width: 5, color: '0xFFFFFF', alpha: 1 })
-              .fill(0xa0a8a8);
+            this.selectedPT.selected = false;
           }
+
+          // 更新矩形的边框颜色
+          const { x, y } = clickPT.positionData;
+          clickPT.selected = true;
+          clickPT.clear();
+          clickPT.rect(x, y, this.PTw, this.PTh)
+            .stroke({ width: 5, color: '0xFFFFFF', alpha: 1 })
+            .fill(0xa0a8a8);
+          clickPT.stroke({ width: 2, color: '0xFF0000' })
+
+          // 缓存选中的PT
+          this.selectedPT = clickPT;
         });
-        container.addChild(forbidSprite);
+      }
+
+      // 4.初步根据状态生成不同的纹理贴图
+      for (let i = 0; i < this.PTNums; i++) {
+        let texture = Texture.EMPTY
+        const data = JsonData[i];
+        if (data.status == 1) {
+          texture = forbidTexture
+        }
+
+        if (data.channelNo == 2) {
+          texture = channelTexture
+        }
+        // 根据状态生成图片
+        const sprite = new Sprite(texture);
+        sprite.width = Math.min(this.PTw, this.PTh) - this.PTgap;
+        sprite.height = Math.min(this.PTw, this.PTh) - this.PTgap;
+        sprite.x = (i % this.PTx) * (this.PTw + this.PTgap) + this.PTw / 2 - sprite.width / 2;
+        sprite.y = Math.floor(i / this.PTx) * (this.PTh + this.PTgap) + this.PTh / 2 - sprite.height / 2;
+
+        sprite.pointerEvents = false;
+
+        container.addChild(sprite);
       }
 
       container.pivot.set(container.width / 2, container.height / 2)
@@ -200,8 +218,8 @@ export default {
 }
 
 .pixi-container {
-  width: 60vw;
-  height: 60vh;
+  width: 80vw;
+  height: 80vh;
 }
 
 .pixi {
